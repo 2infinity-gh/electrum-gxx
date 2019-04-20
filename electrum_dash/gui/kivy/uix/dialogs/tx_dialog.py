@@ -5,9 +5,9 @@ from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.uix.label import Label
 
-from electrum_dash.gui.kivy.i18n import _
+from electrum_gxx.gui.kivy.i18n import _
 from datetime import datetime
-from electrum_dash.util import InvalidPassword
+from electrum_gxx.util import InvalidPassword
 
 Builder.load_string('''
 
@@ -83,7 +83,7 @@ Builder.load_string('''
             IconButton:
                 size_hint: 0.5, None
                 height: '48dp'
-                icon: 'atlas://electrum_dash/gui/kivy/theming/light/qrcode'
+                icon: 'atlas://electrum_gxx/gui/kivy/theming/light/qrcode'
                 on_release: root.show_qr()
             Button:
                 size_hint: 0.5, None
@@ -148,7 +148,7 @@ class TxDialog(Factory.Popup):
         self.app.broadcast(self.tx)
 
     def show_qr(self):
-        from electrum_dash.bitcoin import base_encode, bfh
+        from electrum_gxx.bitcoin import base_encode, bfh
         raw_tx = str(self.tx)
         text = bfh(raw_tx)
         text = base_encode(text, base=43)

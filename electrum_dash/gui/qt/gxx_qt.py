@@ -2,7 +2,7 @@
 
 from PyQt5.QtWidgets import QTextEdit
 
-from electrum_dash.dash_tx import SPEC_TX_NAMES
+from electrum_gxx.gxx_tx import SPEC_TX_NAMES
 
 
 class ExtraPayloadWidget(QTextEdit):

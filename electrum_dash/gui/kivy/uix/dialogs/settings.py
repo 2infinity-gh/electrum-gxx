@@ -3,17 +3,17 @@ from kivy.factory import Factory
 from kivy.properties import ObjectProperty
 from kivy.lang import Builder
 
-from electrum_dash.util import base_units_list
-from electrum_dash.i18n import languages
-from electrum_dash.gui.kivy.i18n import _
-from electrum_dash.plugin import run_hook
-from electrum_dash import coinchooser
+from electrum_gxx.util import base_units_list
+from electrum_gxx.i18n import languages
+from electrum_gxx.gui.kivy.i18n import _
+from electrum_gxx.plugin import run_hook
+from electrum_gxx import coinchooser
 
 from .choice_dialog import ChoiceDialog
 
 Builder.load_string('''
 #:import partial functools.partial
-#:import _ electrum_dash.gui.kivy.i18n._
+#:import _ electrum_gxx.gui.kivy.i18n._
 
 <SettingsDialog@Popup>
     id: settings
@@ -168,7 +168,7 @@ class SettingsDialog(Factory.Popup):
                 net_params = net_params._replace(proxy=proxy)
                 network.run_from_another_thread(network.set_parameters(net_params))
                 item.status = self.proxy_status()
-            popup = Builder.load_file('electrum_dash/gui/kivy/uix/ui_screens/proxy.kv')
+            popup = Builder.load_file('electrum_gxx/gui/kivy/uix/ui_screens/proxy.kv')
             popup.ids.mode.text = proxy.get('mode') if proxy else 'None'
             popup.ids.host.text = proxy.get('host') if proxy else ''
             popup.ids.port.text = proxy.get('port') if proxy else ''

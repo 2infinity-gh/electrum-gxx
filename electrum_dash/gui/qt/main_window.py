@@ -47,14 +47,14 @@ from PyQt5.QtWidgets import (QMessageBox, QComboBox, QSystemTrayIcon, QTabWidget
                              QShortcut, QMainWindow, QCompleter, QInputDialog,
                              QWidget, QMenu, QSizePolicy, QStatusBar, QAction)
 
-import electrum_dash
-from electrum_dash  import (keystore, simple_config, ecc, constants, util, bitcoin, commands,
+import electrum_gxx
+from electrum_gxx  import (keystore, simple_config, ecc, constants, util, bitcoin, commands,
                             coinchooser, paymentrequest)
-from electrum_dash.bitcoin import COIN, is_address, TYPE_ADDRESS
-from electrum_dash.dash_tx import DashTxError
-from electrum_dash.plugin import run_hook
-from electrum_dash.i18n import _
-from electrum_dash.util import (format_time, format_satoshis, format_fee_satoshis,
+from electrum_gxx.bitcoin import COIN, is_address, TYPE_ADDRESS
+from electrum_gxx.gxx_tx import DashTxError
+from electrum_gxx.plugin import run_hook
+from electrum_gxx.i18n import _
+from electrum_gxx.util import (format_time, format_satoshis, format_fee_satoshis,
                                 format_satoshis_plain, NotEnoughFunds, PrintError,
                                 UserCancelled, NoDynamicFeeEstimates, profiler,
                                 export_meta, import_meta, bh2u, bfh, InvalidPassword,
@@ -62,16 +62,16 @@ from electrum_dash.util import (format_time, format_satoshis, format_fee_satoshi
                                 decimal_point_to_base_unit_name, quantize_feerate,
                                 UnknownBaseUnit, DECIMAL_POINT_DEFAULT, UserFacingException,
                                 get_new_wallet_name, send_exception_to_crash_reporter)
-from electrum_dash.transaction import Transaction, TxOutput
-from electrum_dash.address_synchronizer import AddTransactionException
-from electrum_dash.wallet import (Multisig_Wallet, Abstract_Wallet,
+from electrum_gxx.transaction import Transaction, TxOutput
+from electrum_gxx.address_synchronizer import AddTransactionException
+from electrum_gxx.wallet import (Multisig_Wallet, Abstract_Wallet,
                                   sweep_preparations, InternalAddressCorruption)
-from electrum_dash.version import ELECTRUM_VERSION
-from electrum_dash.network import Network, TxBroadcastError, BestEffortRequestFailed
-from electrum_dash.exchange_rate import FxThread
-from electrum_dash.simple_config import SimpleConfig
-from electrum_dash.base_crash_reporter import BaseCrashReporter
-from electrum_dash.masternode_manager import MasternodeManager
+from electrum_gxx.version import ELECTRUM_VERSION
+from electrum_gxx.network import Network, TxBroadcastError, BestEffortRequestFailed
+from electrum_gxx.exchange_rate import FxThread
+from electrum_gxx.simple_config import SimpleConfig
+from electrum_gxx.base_crash_reporter import BaseCrashReporter
+from electrum_gxx.masternode_manager import MasternodeManager
 
 from .exception_window import Exception_Hook
 from .amountedit import AmountEdit, BTCAmountEdit, MyLineEdit, FeerateEdit
@@ -89,7 +89,7 @@ from .installwizard import WIF_HELP_TEXT
 from .history_list import HistoryList, HistoryModel
 from .update_checker import UpdateCheck, UpdateCheckThread
 from .masternode_dialog import MasternodeDialog
-from .dash_qt import ExtraPayloadWidget
+from .gxx_qt import ExtraPayloadWidget
 from .protx_qt import create_dip3_tab
 
 
@@ -113,7 +113,7 @@ class StatusBarButton(QPushButton):
             self.func()
 
 
-from electrum_dash.paymentrequest import PR_PAID
+from electrum_gxx.paymentrequest import PR_PAID
 
 
 class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
@@ -210,7 +210,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         if self.config.get("is_maximized"):
             self.showMaximized()
 
-        self.setWindowIcon(read_QIcon("electrum-dash.png"))
+        self.setWindowIcon(read_QIcon("electrum-gxx.png"))
         self.init_menubar()
 
         wrtabs = weakref.proxy(tabs)
@@ -654,9 +654,9 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         help_menu = menubar.addMenu(_("&Help"))
         help_menu.addAction(_("&About"), self.show_about)
         help_menu.addAction(_("&Check for updates"), self.show_update_check)
-        help_menu.addAction(_("&Official website"), lambda: webbrowser.open("https://electrum.dash.org"))
+        help_menu.addAction(_("&Official website"), lambda: webbrowser.open("https://electrum.gxx.org"))
         help_menu.addSeparator()
-        help_menu.addAction(_("&Documentation"), lambda: webbrowser.open("https://docs.dash.org/en/latest/wallets/index.html#dash-electrum-wallet")).setShortcut(QKeySequence.HelpContents)
+        help_menu.addAction(_("&Documentation"), lambda: webbrowser.open("https://docs.gxx.org/en/latest/wallets/index.html#gxx-electrum-wallet")).setShortcut(QKeySequence.HelpContents)
         self._auto_crash_reports = QAction(_("&Automated Crash Reports"), self, checkable=True)
         self._auto_crash_reports.setChecked(self.config.get(BaseCrashReporter.config_key, default=False))
         self._auto_crash_reports.triggered.connect(self.auto_crash_reports)
@@ -675,7 +675,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         d = self.network.get_donation_address()
         if d:
             host = self.network.get_parameters().host
-            self.pay_to_URI('dash:%s?message=donation for %s'%(d, host))
+            self.pay_to_URI('gxx:%s?message=donation for %s'%(d, host))
         else:
             self.show_error(_('No donation address for this server'))
 
@@ -695,7 +695,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
     def show_report_bug(self):
         msg = ' '.join([
             _("Please report any bugs as issues on github:<br/>"),
-            "<a href=\"https://github.com/akhavr/electrum-dash/issues\">https://github.com/akhavr/electrum-dash/issues</a><br/><br/>",
+            "<a href=\"https://github.com/akhavr/electrum-gxx/issues\">https://github.com/akhavr/electrum-gxx/issues</a><br/><br/>",
             _("Before reporting a bug, upgrade to the most recent version of Dash Electrum (latest release or git HEAD), and include the version number in your report."),
             _("Try to explain not only what the bug is, but how it occurs.")
          ])
@@ -2111,7 +2111,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             'plugins': self.gui_object.plugins,
             'window': self,
             'config': self.config,
-            'electrum': electrum_dash,
+            'electrum': electrum_gxx,
             'daemon': self.gui_object.daemon,
             'util': util,
             'bitcoin': bitcoin,
@@ -2171,7 +2171,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         self.send_button.setVisible(not self.wallet.is_watching_only())
 
     def change_password_dialog(self):
-        from electrum_dash.storage import STO_EV_XPUB_PW
+        from electrum_gxx.storage import STO_EV_XPUB_PW
         if self.wallet.get_available_storage_encryption_version() == STO_EV_XPUB_PW:
             from .password_dialog import ChangePasswordDialogForHW
             d = ChangePasswordDialogForHW(self, self.wallet)
@@ -2530,7 +2530,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         return d.run()
 
     def tx_from_text(self, txt):
-        from electrum_dash.transaction import tx_from_str
+        from electrum_gxx.transaction import tx_from_str
         try:
             tx = tx_from_str(txt)
             return Transaction(tx)
@@ -2539,7 +2539,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             return
 
     def read_tx_from_qrcode(self):
-        from electrum_dash import qrscanner
+        from electrum_gxx import qrscanner
         try:
             data = qrscanner.scan_barcode(self.config.get_video_device())
         except BaseException as e:
@@ -2547,8 +2547,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             return
         if not data:
             return
-        # if the user scanned a dash URI
-        if str(data).startswith("dash:"):
+        # if the user scanned a gxx URI
+        if str(data).startswith("gxx:"):
             self.pay_to_URI(data)
             return
         # else if the user scanned an offline signed tx
@@ -2588,7 +2588,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
             self.show_transaction(tx)
 
     def do_process_from_txid(self):
-        from electrum_dash import transaction
+        from electrum_gxx import transaction
         txid, ok = QInputDialog.getText(self, _('Lookup transaction'), _('Transaction ID') + ':')
         if ok and txid:
             txid = str(txid).strip()
@@ -2624,7 +2624,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         e.setReadOnly(True)
         vbox.addWidget(e)
 
-        defaultname = 'electrum-dash-private-keys.csv'
+        defaultname = 'electrum-gxx-private-keys.csv'
         select_msg = _('Select file to export your private keys to')
         hbox, filename_e, csv_button = filename_field(self, self.config, defaultname, select_msg)
         vbox.addLayout(hbox)
@@ -2849,7 +2849,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         lang_help = _('Select which language is used in the GUI (after restart).')
         lang_label = HelpLabel(_('Language') + ':', lang_help)
         lang_combo = QComboBox()
-        from electrum_dash.i18n import languages
+        from electrum_gxx.i18n import languages
         lang_combo.addItems(list(languages.values()))
         lang_keys = list(languages.keys())
         lang_cur_setting = self.config.get("language", '')
@@ -2962,7 +2962,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
 
         units = base_units_list
         msg = (_('Base unit of your wallet.')
-               + '\n1 DASH = 1000 mDASH. 1 mDASH = 1000 uDASH. 1 uDASH = 100 duffs.\n'
+               + '\n1 GXX = 1000 mGXX. 1 mGXX = 1000 uGXX. 1 uGXX = 100 duffs.\n'
                + _('This setting affects the Send tab, and all balance related fields.'))
         unit_label = HelpLabel(_('Base unit') + ':', msg)
         unit_combo = QComboBox()
@@ -3007,7 +3007,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, PrintError):
         block_ex_combo.currentIndexChanged.connect(on_be)
         gui_widgets.append((block_ex_label, block_ex_combo))
 
-        from electrum_dash import qrscanner
+        from electrum_gxx import qrscanner
         system_cameras = qrscanner._find_system_cameras()
         qr_combo = QComboBox()
         qr_combo.addItem("Default","default")

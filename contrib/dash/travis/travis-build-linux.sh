@@ -6,21 +6,21 @@ if [[ -z $TRAVIS_TAG ]]; then
   exit 1
 fi
 
-BUILD_REPO_URL=https://github.com/akhavr/electrum-dash.git
+BUILD_REPO_URL=https://github.com/akhavr/electrum-gxx.git
 
 cd build
 
-git clone --branch $TRAVIS_TAG $BUILD_REPO_URL electrum-dash
+git clone --branch $TRAVIS_TAG $BUILD_REPO_URL electrum-gxx
 
-mkdir -p electrum-dash/dist
-wget -O electrum-dash/dist/tor-proxy-setup.exe \
+mkdir -p electrum-gxx/dist
+wget -O electrum-gxx/dist/tor-proxy-setup.exe \
     https://github.com/zebra-lucky/tor-proxy/releases/download/0.3.3.9/tor-proxy-0.3.3.9-setup.exe
 
 
 docker run --rm \
     -v $(pwd):/opt \
-    -w /opt/electrum-dash \
-    -t zebralucky/electrum-dash-winebuild:LinuxPy36 /opt/build_linux.sh
+    -w /opt/electrum-gxx \
+    -t zebralucky/electrum-gxx-winebuild:LinuxPy36 /opt/build_linux.sh
 
 sudo find . -name '*.po' -delete
 sudo find . -name '*.pot' -delete
@@ -28,8 +28,8 @@ sudo find . -name '*.pot' -delete
 
 docker run --rm \
     -v $(pwd):/opt \
-    -w /opt/electrum-dash/contrib/dash/travis \
-    -t zebralucky/electrum-dash-winebuild:LinuxAppImage ./build_appimage.sh
+    -w /opt/electrum-gxx/contrib/gxx/travis \
+    -t zebralucky/electrum-gxx-winebuild:LinuxAppImage ./build_appimage.sh
 
 
 export WINEARCH=win32
@@ -50,9 +50,9 @@ docker run --rm \
     -e WINEPREFIX=$WINEPREFIX \
     -e PYHOME=$PYHOME \
     -v $(pwd):/opt \
-    -v $(pwd)/electrum-dash/:$WINEPREFIX/drive_c/electrum-dash \
-    -w /opt/electrum-dash \
-    -t zebralucky/electrum-dash-winebuild:WinePy36 /opt/build_wine.sh
+    -v $(pwd)/electrum-gxx/:$WINEPREFIX/drive_c/electrum-gxx \
+    -w /opt/electrum-gxx \
+    -t zebralucky/electrum-gxx-winebuild:WinePy36 /opt/build_wine.sh
 
 export WINEARCH=win64
 export WINEPREFIX=/root/.wine-64
@@ -72,6 +72,6 @@ docker run --rm \
     -e WINEPREFIX=$WINEPREFIX \
     -e PYHOME=$PYHOME \
     -v $(pwd):/opt \
-    -v $(pwd)/electrum-dash/:$WINEPREFIX/drive_c/electrum-dash \
-    -w /opt/electrum-dash \
-    -t zebralucky/electrum-dash-winebuild:WinePy36 /opt/build_wine.sh
+    -v $(pwd)/electrum-gxx/:$WINEPREFIX/drive_c/electrum-gxx \
+    -w /opt/electrum-gxx \
+    -t zebralucky/electrum-gxx-winebuild:WinePy36 /opt/build_wine.sh

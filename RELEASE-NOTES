@@ -79,7 +79,7 @@
  * Fix stdio and text wallet gui.
  * Switch to electrum protocol 1.4, ElectrumX>=1.9.1 recommended to
    support DIP3 electrum protocol methods.
- * Switch mainnet block explorer to insight.dash.org.
+ * Switch mainnet block explorer to insight.gxx.org.
 
 
 # Release 3.2.4 (Security update)
@@ -108,7 +108,7 @@
    warning in this case. (#4566)
  * Revealer: the PRNG used has been changed (#4649)
  * fix Linux distributables: 'typing' was not bundled, needed for python 3.4
- * fix #4491: on Android, if user had set "uDASH" as base unit, app crashed
+ * fix #4491: on Android, if user had set "uGXX" as base unit, app crashed
  * fix #4497: on Android, paying bip70 invoices from cold start did not work
  * Several other minor bugfixes and usability improvements.
 
@@ -269,7 +269,7 @@
 # Release 3.0.6.3 :
 
  * Fix bip44_derivation call
- * Refresh DASH logo
+ * Refresh GXX logo
 
 # Release 3.0.6.2 :
 

@@ -1,27 +1,27 @@
 import base64
 import sys
 
-from electrum_dash.bitcoin import (public_key_to_p2pkh, address_from_private_key,
+from electrum_gxx.bitcoin import (public_key_to_p2pkh, address_from_private_key,
                                    is_address, is_private_key, is_new_seed, is_old_seed,
                                    var_int, op_push, address_to_script,
                                    deserialize_privkey, serialize_privkey,
                                    is_b58_address, address_to_scripthash, is_minikey,
                                    is_compressed_privkey, seed_type, EncodeBase58Check,
                                    script_num_to_hex, push_script, add_number_to_script, int_to_hex)
-from electrum_dash.bip32 import (bip32_root, bip32_public_derivation, bip32_private_derivation,
+from electrum_gxx.bip32 import (bip32_root, bip32_public_derivation, bip32_private_derivation,
                                  xpub_from_xprv, xpub_type, is_xprv, is_bip32_derivation,
                                  is_xpub, convert_bip32_path_to_list_of_uint32,
                                  deserialize_drkv, deserialize_drkp, deserialize_xprv,
                                  deserialize_xpub)
-from electrum_dash.crypto import sha256d, SUPPORTED_PW_HASH_VERSIONS
-from electrum_dash import ecc, crypto, constants
-from electrum_dash.ecc import number_to_string, string_to_number
-from electrum_dash.transaction import opcodes
-from electrum_dash.util import bfh, bh2u, InvalidPassword
-from electrum_dash.storage import WalletStorage
-from electrum_dash.keystore import xtype_from_derivation, from_master_key
+from electrum_gxx.crypto import sha256d, SUPPORTED_PW_HASH_VERSIONS
+from electrum_gxx import ecc, crypto, constants
+from electrum_gxx.ecc import number_to_string, string_to_number
+from electrum_gxx.transaction import opcodes
+from electrum_gxx.util import bfh, bh2u, InvalidPassword
+from electrum_gxx.storage import WalletStorage
+from electrum_gxx.keystore import xtype_from_derivation, from_master_key
 
-from electrum_dash import ecc_fast
+from electrum_gxx import ecc_fast
 
 from . import SequentialTestCase
 from . import TestCaseForTestnet

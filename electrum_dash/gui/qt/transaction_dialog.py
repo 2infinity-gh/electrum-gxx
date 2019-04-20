@@ -36,14 +36,14 @@ from PyQt5.QtWidgets import (QDialog, QLabel, QPushButton, QHBoxLayout, QVBoxLay
 import qrcode
 from qrcode import exceptions
 
-from electrum_dash.bitcoin import base_encode
-from electrum_dash.i18n import _
-from electrum_dash.plugin import run_hook
-from electrum_dash import simple_config
-from electrum_dash.util import bfh
-from electrum_dash.transaction import SerializationError, Transaction
+from electrum_gxx.bitcoin import base_encode
+from electrum_gxx.i18n import _
+from electrum_gxx.plugin import run_hook
+from electrum_gxx import simple_config
+from electrum_gxx.util import bfh
+from electrum_gxx.transaction import SerializationError, Transaction
 
-from .dash_qt import ExtraPayloadWidget
+from .gxx_qt import ExtraPayloadWidget
 from .util import (MessageBoxMixin, read_QIcon, Buttons, CopyButton,
                    MONOSPACE_FONT, ColorScheme, ButtonsLineEdit)
 

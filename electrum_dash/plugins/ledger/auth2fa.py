@@ -13,10 +13,10 @@ from PyQt5.QtCore import QThread, pyqtSignal
 
 from btchip.btchip import BTChipException
 
-from electrum_dash.i18n import _
-from electrum_dash.util import print_msg
-from electrum_dash import constants, bitcoin
-from electrum_dash.gui.qt.qrcodewidget import QRCodeWidget
+from electrum_gxx.i18n import _
+from electrum_gxx.util import print_msg
+from electrum_gxx import constants, bitcoin
+from electrum_gxx.gui.qt.qrcodewidget import QRCodeWidget
 
 
 DEBUG = False

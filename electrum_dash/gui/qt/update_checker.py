@@ -10,16 +10,16 @@ from PyQt5.QtCore import Qt, QThread, pyqtSignal
 from PyQt5.QtWidgets import (QWidget, QVBoxLayout, QLabel, QProgressBar,
                              QHBoxLayout, QPushButton)
 
-from electrum_dash import version
-from electrum_dash import constants
-from electrum_dash import ecc
-from electrum_dash.i18n import _
-from electrum_dash.util import PrintError, make_aiohttp_session
+from electrum_gxx import version
+from electrum_gxx import constants
+from electrum_gxx import ecc
+from electrum_gxx.i18n import _
+from electrum_gxx.util import PrintError, make_aiohttp_session
 
 
 class UpdateCheck(QWidget, PrintError):
-    url = "https://raw.githubusercontent.com/akhavr/electrum-dash/master/.latest-version"
-    download_url = "https://github.com/akhavr/electrum-dash/releases"
+    url = "https://raw.githubusercontent.com/akhavr/electrum-gxx/master/.latest-version"
+    download_url = "https://github.com/akhavr/electrum-gxx/releases"
 
 
     VERSION_ANNOUNCEMENT_SIGNING_KEYS = (

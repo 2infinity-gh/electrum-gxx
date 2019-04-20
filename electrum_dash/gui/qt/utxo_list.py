@@ -30,7 +30,7 @@ from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont
 from PyQt5.QtWidgets import QAbstractItemView, QMenu
 
-from electrum_dash.i18n import _
+from electrum_gxx.i18n import _
 
 from .util import MyTreeView, ColorScheme, MONOSPACE_FONT
 

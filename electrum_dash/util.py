@@ -61,18 +61,18 @@ def inv_dict(d):
 ca_path = certifi.where()
 
 
-base_units = {'DASH':8, 'mDASH':5, 'uDASH':2, 'duffs':0}
+base_units = {'GXX':8, 'mGXX':5, 'uGXX':2, 'duffs':0}
 base_units_inverse = inv_dict(base_units)
-base_units_list = ['DASH', 'mDASH', 'uDASH', 'duffs']  # list(dict) does not guarantee order
+base_units_list = ['GXX', 'mGXX', 'uGXX', 'duffs']  # list(dict) does not guarantee order
 
-DECIMAL_POINT_DEFAULT = 8  # DASH
+DECIMAL_POINT_DEFAULT = 8  # GXX
 
 
 class UnknownBaseUnit(Exception): pass
 
 
 def decimal_point_to_base_unit_name(dp: int) -> str:
-    # e.g. 8 -> "DASH"
+    # e.g. 8 -> "GXX"
     try:
         return base_units_inverse[dp]
     except KeyError:
@@ -80,7 +80,7 @@ def decimal_point_to_base_unit_name(dp: int) -> str:
 
 
 def base_unit_name_to_decimal_point(unit_name: str) -> int:
-    # e.g. "DASH" -> 8
+    # e.g. "GXX" -> 8
     try:
         return base_units[unit_name]
     except KeyError:
@@ -155,7 +155,7 @@ class Satoshis(object):
         return 'Duffs(%d)'%self.value
 
     def __str__(self):
-        return format_satoshis(self.value) + " DASH"
+        return format_satoshis(self.value) + " GXX"
 
     def __eq__(self, other):
         return self.value == other.value
@@ -491,11 +491,11 @@ def user_dir():
     if 'ANDROID_DATA' in os.environ:
         return android_data_dir()
     elif os.name == 'posix':
-        return os.path.join(os.environ["HOME"], ".electrum-dash")
+        return os.path.join(os.environ["HOME"], ".electrum-gxx")
     elif "APPDATA" in os.environ:
-        return os.path.join(os.environ["APPDATA"], "Electrum-DASH")
+        return os.path.join(os.environ["APPDATA"], "Electrum-GXX")
     elif "LOCALAPPDATA" in os.environ:
-        return os.path.join(os.environ["LOCALAPPDATA"], "Electrum-DASH")
+        return os.path.join(os.environ["LOCALAPPDATA"], "Electrum-GXX")
     else:
         #raise Exception("No home directory found in environment variables.")
         return
@@ -654,16 +654,16 @@ def time_difference(distance_in_time, include_seconds):
         return "over %d years" % (round(distance_in_minutes / 525600))
 
 mainnet_block_explorers = {
-    'Dash.org': ('https://explorer.dash.org/',
+    'Dash.org': ('https://explorer.gxx.org/',
                  {'tx': 'tx/', 'addr': 'address/'}),
-    'Insight.dash.org': ('https://insight.dash.org/insight/',
+    'Insight.gxx.org': ('https://insight.gxx.org/insight/',
                          {'tx': 'tx/', 'addr': 'address/'}),
     'system default': ('blockchain:/',
                        {'tx': 'tx/', 'addr': 'address/'}),
 }
 
 testnet_block_explorers = {
-    'Dash.org': ('https://testnet-insight.dashevo.org/insight/',
+    'Dash.org': ('https://testnet-insight.gxxevo.org/insight/',
                  {'tx': 'tx/', 'addr': 'address/'}),
     'system default': ('blockchain:/',
                        {'tx': 'tx/', 'addr': 'address/'}),
@@ -708,7 +708,7 @@ def parse_URI(uri: str, on_pr: Callable=None) -> dict:
         return {'address': uri}
 
     u = urllib.parse.urlparse(uri)
-    if u.scheme != 'dash':
+    if u.scheme != 'gxx':
         raise Exception("Not a Dash URI")
     address = u.path
 
@@ -775,7 +775,7 @@ def create_URI(addr, amount, message):
         query.append('amount=%s'%format_satoshis_plain(amount))
     if message:
         query.append('message=%s'%urllib.parse.quote(message))
-    p = urllib.parse.ParseResult(scheme='dash', netloc='', path=addr, params='', query='&'.join(query), fragment='')
+    p = urllib.parse.ParseResult(scheme='gxx', netloc='', path=addr, params='', query='&'.join(query), fragment='')
     return urllib.parse.urlunparse(p)
 
 

@@ -5,8 +5,8 @@ from kivy.lang import Builder
 from decimal import Decimal
 from kivy.clock import Clock
 
-from electrum_dash.util import InvalidPassword
-from electrum_dash.gui.kivy.i18n import _
+from electrum_gxx.util import InvalidPassword
+from electrum_gxx.gui.kivy.i18n import _
 
 Builder.load_string('''
 

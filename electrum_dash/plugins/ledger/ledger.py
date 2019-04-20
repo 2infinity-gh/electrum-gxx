@@ -3,17 +3,17 @@ import hashlib
 import sys
 import traceback
 
-from electrum_dash import constants
-from electrum_dash.bitcoin import (TYPE_ADDRESS, int_to_hex, var_int,
+from electrum_gxx import constants
+from electrum_gxx.bitcoin import (TYPE_ADDRESS, int_to_hex, var_int,
                                    b58_address_to_hash160,
                                    hash160_to_b58_address)
-from electrum_dash.bip32 import serialize_xpub
-from electrum_dash.i18n import _
-from electrum_dash.keystore import Hardware_KeyStore
-from electrum_dash.transaction import Transaction
-from electrum_dash.wallet import Standard_Wallet
-from electrum_dash.util import print_error, bfh, bh2u, versiontuple, UserFacingException
-from electrum_dash.base_wizard import ScriptTypeNotSupported
+from electrum_gxx.bip32 import serialize_xpub
+from electrum_gxx.i18n import _
+from electrum_gxx.keystore import Hardware_KeyStore
+from electrum_gxx.transaction import Transaction
+from electrum_gxx.wallet import Standard_Wallet
+from electrum_gxx.util import print_error, bfh, bh2u, versiontuple, UserFacingException
+from electrum_gxx.base_wizard import ScriptTypeNotSupported
 
 
 def setAlternateCoinVersions(self, regular, p2sh):
@@ -60,7 +60,7 @@ def test_pin_unlocked(func):
     return catch_exception
 
 
-class btchip_dash(btchip):
+class btchip_gxx(btchip):
     def __init__(self, dongle):
         btchip.__init__(self, dongle)
 
@@ -150,7 +150,7 @@ class btchip_dash(btchip):
 
 class Ledger_Client():
     def __init__(self, hidDevice):
-        self.dongleObject = btchip_dash(hidDevice)
+        self.dongleObject = btchip_gxx(hidDevice)
         self.preflightDone = False
 
     def is_pairable(self):

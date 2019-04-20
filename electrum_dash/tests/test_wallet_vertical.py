@@ -3,13 +3,13 @@ import shutil
 import tempfile
 from typing import Sequence
 
-from electrum_dash import storage, bitcoin, keystore
-from electrum_dash.transaction import Transaction
-from electrum_dash.simple_config import SimpleConfig
-from electrum_dash.address_synchronizer import TX_HEIGHT_UNCONFIRMED, TX_HEIGHT_UNCONF_PARENT
-from electrum_dash.wallet import sweep, Multisig_Wallet, Standard_Wallet, Imported_Wallet
-from electrum_dash.util import bfh, bh2u
-from electrum_dash.transaction import TxOutput
+from electrum_gxx import storage, bitcoin, keystore
+from electrum_gxx.transaction import Transaction
+from electrum_gxx.simple_config import SimpleConfig
+from electrum_gxx.address_synchronizer import TX_HEIGHT_UNCONFIRMED, TX_HEIGHT_UNCONF_PARENT
+from electrum_gxx.wallet import sweep, Multisig_Wallet, Standard_Wallet, Imported_Wallet
+from electrum_gxx.util import bfh, bh2u
+from electrum_gxx.transaction import TxOutput
 
 from . import TestCaseForTestnet
 from . import SequentialTestCase

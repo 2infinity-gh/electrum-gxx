@@ -24,13 +24,13 @@ from PyQt5.QtGui import (QPixmap, QImage, QBitmap, QPainter, QFontDatabase, QPen
 from PyQt5.QtWidgets import (QGridLayout, QVBoxLayout, QHBoxLayout, QLabel,
                              QPushButton, QLineEdit)
 
-from electrum_dash.plugin import hook
-from electrum_dash.i18n import _
-from electrum_dash.util import make_dir, InvalidPassword, UserCancelled
-from electrum_dash.gui.qt.util import (read_QIcon, EnterButton, WWLabel, icon_path,
+from electrum_gxx.plugin import hook
+from electrum_gxx.i18n import _
+from electrum_gxx.util import make_dir, InvalidPassword, UserCancelled
+from electrum_gxx.gui.qt.util import (read_QIcon, EnterButton, WWLabel, icon_path,
                                        WindowModalDialog, Buttons, CloseButton, OkButton)
-from electrum_dash.gui.qt.qrtextedit import ScanQRTextEdit
-from electrum_dash.gui.qt.main_window import StatusBarButton
+from electrum_gxx.gui.qt.qrtextedit import ScanQRTextEdit
+from electrum_gxx.gui.qt.main_window import StatusBarButton
 
 from .revealer import RevealerPlugin
 
@@ -73,7 +73,7 @@ class Plugin(RevealerPlugin):
         return EnterButton(_('Printer Calibration'), partial(self.calibration_dialog, window))
 
     def password_dialog(self, msg=None, parent=None):
-        from electrum_dash.gui.qt.password_dialog import PasswordDialog
+        from electrum_gxx.gui.qt.password_dialog import PasswordDialog
         parent = parent or self
         d = PasswordDialog(parent, msg)
         return d.run()
@@ -456,7 +456,7 @@ class Plugin(RevealerPlugin):
         font = QFont('Source Sans Pro', 7, QFont.Normal)
         painter.setFont(font)
         painter.drawText(700, 2177, _("1. Place this paper on a flat and well iluminated surface."))
-        painter.drawText(700, 2277, _("2. Align your Revealer borderlines to the dashed lines on the top and left."))
+        painter.drawText(700, 2277, _("2. Align your Revealer borderlines to the gxxed lines on the top and left."))
         painter.drawText(700, 2377, _("3. Press slightly the Revealer against the paper and read the numbers that best "
                                       "match on the opposite sides. "))
         painter.drawText(700, 2477, _("4. Type the numbers in the software"))

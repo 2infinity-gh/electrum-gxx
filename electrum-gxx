@@ -28,11 +28,11 @@ import sys
 
 script_dir = os.path.dirname(os.path.realpath(__file__))
 is_bundle = getattr(sys, 'frozen', False)
-is_local = not is_bundle and os.path.exists(os.path.join(script_dir, "electrum-dash.desktop"))
+is_local = not is_bundle and os.path.exists(os.path.join(script_dir, "electrum-gxx.desktop"))
 is_android = 'ANDROID_DATA' in os.environ
 
 # move this back to gui/kivy/__init.py once plugins are moved
-os.environ['KIVY_DATA_DIR'] = os.path.abspath(os.path.dirname(__file__)) + '/electrum_dash/gui/kivy/data/'
+os.environ['KIVY_DATA_DIR'] = os.path.abspath(os.path.dirname(__file__)) + '/electrum_gxx/gui/kivy/data/'
 
 if is_local or is_android:
     sys.path.insert(0, os.path.join(script_dir, 'packages'))
@@ -65,16 +65,16 @@ if not is_android:
     check_imports()
 
 
-from electrum_dash import util
-from electrum_dash import constants
-from electrum_dash import SimpleConfig
-from electrum_dash.wallet import Wallet
-from electrum_dash.storage import WalletStorage, get_derivation_used_for_hw_device_encryption
-from electrum_dash.util import print_msg, print_stderr, json_encode, json_decode, UserCancelled
-from electrum_dash.util import set_verbosity, InvalidPassword
-from electrum_dash.commands import get_parser, known_commands, Commands, config_variables
-from electrum_dash import daemon
-from electrum_dash import keystore
+from electrum_gxx import util
+from electrum_gxx import constants
+from electrum_gxx import SimpleConfig
+from electrum_gxx.wallet import Wallet
+from electrum_gxx.storage import WalletStorage, get_derivation_used_for_hw_device_encryption
+from electrum_gxx.util import print_msg, print_stderr, json_encode, json_decode, UserCancelled
+from electrum_gxx.util import set_verbosity, InvalidPassword
+from electrum_gxx.commands import get_parser, known_commands, Commands, config_variables
+from electrum_gxx import daemon
+from electrum_gxx import keystore
 
 # get password routine
 def prompt_password(prompt, confirm=True):
@@ -96,7 +96,7 @@ def init_daemon(config_options):
         print_msg('Info: %s' % storage.backup_message)
     if not storage.file_exists():
         print_msg("Error: Wallet file not found.")
-        print_msg("Type 'electrum-dash create' to create a new wallet, or provide a path to a wallet with the -w option")
+        print_msg("Type 'electrum-gxx create' to create a new wallet, or provide a path to a wallet with the -w option")
         sys.exit(0)
     if storage.is_encrypted():
         if storage.is_encrypted_with_hw_device():
@@ -136,7 +136,7 @@ def init_cmdline(config_options, server):
 
     if cmd.requires_wallet and not storage.file_exists():
         print_msg("Error: Wallet file not found.")
-        print_msg("Type 'electrum-dash create' to create a new wallet, or provide a path to a wallet with the -w option")
+        print_msg("Type 'electrum-gxx create' to create a new wallet, or provide a path to a wallet with the -w option")
         sys.exit(0)
 
     # important warning
@@ -250,7 +250,7 @@ def run_offline_command(config, config_options, plugins):
 
 
 def init_plugins(config, gui_name):
-    from electrum_dash.plugin import Plugins
+    from electrum_gxx.plugin import Plugins
     return Plugins(config, gui_name)
 
 
@@ -319,7 +319,7 @@ if __name__ == '__main__':
     # check uri
     uri = config_options.get('url')
     if uri:
-        if not uri.startswith('dash:'):
+        if not uri.startswith('gxx:'):
             print_stderr('unknown command:', uri)
             sys.exit(1)
         config_options['url'] = uri
@@ -359,7 +359,7 @@ if __name__ == '__main__':
                 init_plugins(config, 'cmdline')
                 d = daemon.Daemon(config, fd)
                 if config.get('websocket_server'):
-                    from electrum_dash import websockets
+                    from electrum_gxx import websockets
                     websockets.WebSocketServer(config, d.network)
                 if config.get('requests_dir'):
                     path = os.path.join(config.get('requests_dir'), 'index.html')
@@ -387,7 +387,7 @@ if __name__ == '__main__':
         else:
             cmd = known_commands[cmdname]
             if cmd.requires_network:
-                print_msg("Daemon not running; try 'electrum-dash daemon start'")
+                print_msg("Daemon not running; try 'electrum-gxx daemon start'")
                 sys.exit(1)
             else:
                 plugins = init_plugins(config, 'cmdline')

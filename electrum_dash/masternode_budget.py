@@ -109,7 +109,7 @@ class BudgetProposal(object):
             raise ValueError(_('Only P2PKH addresses are currently supported.'))
 
         if self.payment_amount < bitcoin.COIN:
-            raise ValueError(_('Payments must be at least 1 DASH.'))
+            raise ValueError(_('Payments must be at least 1 GXX.'))
 
         # Calculate max budget.
         subsidy = 5 * bitcoin.COIN

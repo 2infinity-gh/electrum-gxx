@@ -229,7 +229,7 @@ class Network(PrintError):
         self.config = SimpleConfig(config) if isinstance(config, dict) else config  # type: SimpleConfig
 
         # Autodetect and enable Tor proxy on Network init
-        self.tor_docs_uri = ('https://github.com/akhavr/electrum-dash/'
+        self.tor_docs_uri = ('https://github.com/akhavr/electrum-gxx/'
                              'blob/%s/docs/tor.md' % ELECTRUM_VERSION)
         self.tor_docs_title = 'Tor Setup Docs'
         self.tor_docs_uri_qt = ('<br><br><a href="%s">%s</a>' %
@@ -976,7 +976,7 @@ class Network(PrintError):
             if substring in server_msg:
                 return substring
         # Dashd v0.13.1 specific errors
-        dashd_specific_error_messages = {
+        gxxd_specific_error_messages = {
             r"bad-qc-not-allowed",
             r"bad-qc-missing",
             r"bad-qc-block",
@@ -1066,7 +1066,7 @@ class Network(PrintError):
             r"Transaction check failed",
             r"bad-version",
         }
-        for substring in dashd_specific_error_messages:
+        for substring in gxxd_specific_error_messages:
             if substring in server_msg:
                 return substring
         # otherwise:

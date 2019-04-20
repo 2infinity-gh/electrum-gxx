@@ -41,7 +41,7 @@ from .bitcoin import (TYPE_ADDRESS, TYPE_PUBKEY, TYPE_SCRIPT, hash_160,
                       push_script, int_to_hex, push_script, b58_address_to_hash160)
 from .crypto import sha256d
 from .keystore import xpubkey_to_address, xpubkey_to_pubkey
-from .dash_tx import read_extra_payload, serialize_extra_payload, to_varbytes
+from .gxx_tx import read_extra_payload, serialize_extra_payload, to_varbytes
 
 
 NO_SIGNATURE = 'ff'

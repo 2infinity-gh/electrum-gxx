@@ -6,15 +6,15 @@ import locale
 from decimal import Decimal
 import getpass
 
-import electrum_dash
-from electrum_dash.dash_tx import SPEC_TX_NAMES
-from electrum_dash.util import format_satoshis, set_verbosity
-from electrum_dash.bitcoin import is_address, COIN, TYPE_ADDRESS
-from electrum_dash.transaction import TxOutput
-from electrum_dash.wallet import Wallet
-from electrum_dash.storage import WalletStorage
-from electrum_dash.network import NetworkParameters, TxBroadcastError, BestEffortRequestFailed
-from electrum_dash.interface import deserialize_server
+import electrum_gxx
+from electrum_gxx.gxx_tx import SPEC_TX_NAMES
+from electrum_gxx.util import format_satoshis, set_verbosity
+from electrum_gxx.bitcoin import is_address, COIN, TYPE_ADDRESS
+from electrum_gxx.transaction import TxOutput
+from electrum_gxx.wallet import Wallet
+from electrum_gxx.storage import WalletStorage
+from electrum_gxx.network import NetworkParameters, TxBroadcastError, BestEffortRequestFailed
+from electrum_gxx.interface import deserialize_server
 
 _ = lambda x:x  # i18n
 
@@ -27,7 +27,7 @@ class ElectrumGui:
         self.network = daemon.network
         storage = WalletStorage(config.get_wallet_path())
         if not storage.file_exists():
-            print("Wallet not found. try 'electrum-dash create'")
+            print("Wallet not found. try 'electrum-gxx create'")
             exit()
         if storage.is_encrypted():
             password = getpass.getpass('Password:', stream=None)
@@ -452,7 +452,7 @@ class ElectrumGui:
                         self.show_message("Error:" + server + "\nIn doubt, type \"auto-connect\"")
                         return False
             if out.get('server') or out.get('proxy'):
-                proxy = electrum_dash.network.deserialize_proxy(out.get('proxy')) if out.get('proxy') else proxy_config
+                proxy = electrum_gxx.network.deserialize_proxy(out.get('proxy')) if out.get('proxy') else proxy_config
                 net_params = NetworkParameters(host, port, protocol, proxy, auto_connect)
                 self.network.run_from_another_thread(self.network.set_parameters(net_params))
 

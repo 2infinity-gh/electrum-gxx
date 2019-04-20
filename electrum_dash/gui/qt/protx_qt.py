@@ -13,8 +13,8 @@ from PyQt5.QtWidgets import (QTabBar, QTabWidget, QWidget, QLabel, QPushButton,
                              QStyleOptionTab, QStyle, QDialog, QGridLayout,
                              QTextEdit, QMenu)
 
-from electrum_dash.dash_tx import SPEC_PRO_REG_TX, SPEC_PRO_UP_REV_TX
-from electrum_dash.protx import ProRegTxExc, ProTxManagerExc
+from electrum_gxx.gxx_tx import SPEC_PRO_REG_TX, SPEC_PRO_UP_REV_TX
+from electrum_gxx.protx import ProRegTxExc, ProTxManagerExc
 
 from .protx_wizards import Dip3MasternodeWizard
 from .util import icon_path, read_QIcon
@@ -818,7 +818,7 @@ class Dip3MNInfoDialog(QDialog):
         '''
         super(Dip3MNInfoDialog, self).__init__(parent)
         self.setMinimumSize(950, 450)
-        self.setWindowIcon(read_QIcon('electrum-dash.png'))
+        self.setWindowIcon(read_QIcon('electrum-gxx.png'))
 
         self.parent = parent
         self.gui = parent.gui

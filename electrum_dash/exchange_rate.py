@@ -138,7 +138,7 @@ class BitcoinAverage(ExchangeBase):
 
     async def get_rates(self, ccy):
         json = await self.get_json('apiv2.bitcoinaverage.com',
-                                   '/indices/local/ticker/DASH%s' % ccy)
+                                   '/indices/local/ticker/GXX%s' % ccy)
         return {ccy: Decimal(json['last'])}
 
 
@@ -147,7 +147,7 @@ class BitcoinAverage(ExchangeBase):
 
     async def request_history(self, ccy):
         history = await self.get_json('apiv2.bitcoinaverage.com',
-                                      '/indices/local/history/DASH%s'
+                                      '/indices/local/history/GXX%s'
                                       '?period=alltime&format=json' % ccy)
         return dict([(h['time'][:10], h['average']) for h in history])
 
@@ -156,7 +156,7 @@ class Bittrex(ExchangeBase):
     async def get_rates(self, ccy):
         json = await self.get_json('bittrex.com',
                                    '/api/v1.1/public/'
-                                   'getticker?market=%s-DASH' % ccy)
+                                   'getticker?market=%s-GXX' % ccy)
         quote_currencies = {}
         if not json.get('success', False):
             return quote_currencies
@@ -169,14 +169,14 @@ class Poloniex(ExchangeBase):
     async def get_rates(self, ccy):
         json = await self.get_json('poloniex.com', '/public?command=returnTicker')
         quote_currencies = {}
-        dash_ticker = json.get('BTC_DASH')
-        quote_currencies['BTC'] = Decimal(dash_ticker['last'])
+        gxx_ticker = json.get('BTC_GXX')
+        quote_currencies['BTC'] = Decimal(gxx_ticker['last'])
         return quote_currencies
 
 
 class CoinMarketCap(ExchangeBase):
     async def get_rates(self, ccy):
-        json = await self.get_json('api.coinmarketcap.com', '/v1/ticker/dash/')
+        json = await self.get_json('api.coinmarketcap.com', '/v1/ticker/gxx/')
         quote_currencies = {}
         if not isinstance(json, list):
             return quote_currencies

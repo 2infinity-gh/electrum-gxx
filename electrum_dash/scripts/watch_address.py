@@ -3,15 +3,15 @@
 import sys
 import asyncio
 
-from electrum_dash.network import Network
-from electrum_dash.util import print_msg, create_and_start_event_loop
-from electrum_dash.synchronizer import SynchronizerBase
+from electrum_gxx.network import Network
+from electrum_gxx.util import print_msg, create_and_start_event_loop
+from electrum_gxx.synchronizer import SynchronizerBase
 
 
 try:
     addr = sys.argv[1]
 except Exception:
-    print("usage: watch_address <dash_address>")
+    print("usage: watch_address <gxx_address>")
     sys.exit(1)
 
 # start network

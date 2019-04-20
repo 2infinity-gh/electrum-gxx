@@ -9,7 +9,7 @@ from collections import namedtuple, defaultdict
 from . import bitcoin
 from .bitcoin import TYPE_ADDRESS, is_b58_address, b58_address_to_hash160
 from .crypto import sha256d
-from .dash_tx import (TxOutPoint, ProTxService, DashProRegTx, DashProUpServTx,
+from .gxx_tx import (TxOutPoint, ProTxService, DashProRegTx, DashProUpServTx,
                       DashProUpRegTx, DashProUpRevTx, DashCbTx, SPEC_PRO_REG_TX,
                       SPEC_PRO_UP_SERV_TX, SPEC_PRO_UP_REG_TX, SPEC_PRO_UP_REV_TX)
 from .transaction import Transaction, BCDataStream, SerializationError
@@ -29,7 +29,7 @@ class ProTxMNExc(Exception): pass
 
 
 class PartialMerkleTree(namedtuple('PartialMerkleTree', 'total hashes flags')):
-    '''Class representing CPartialMerkleTree of dashd'''
+    '''Class representing CPartialMerkleTree of gxxd'''
     @classmethod
     def read_bytes(cls, raw_bytes):
         vds = BCDataStream()

@@ -15,8 +15,8 @@ The manager displays the following data about each masternode you have set up:
 - The alias (name) of the masternode.
 - Whether the masternode has been activated.
 - The collateral payment of the masternode.
-- The DASH address that received the collateral payment.
-- The DASH address of the delegate key.
+- The GXX address that received the collateral payment.
+- The GXX address of the delegate key.
 - The IP address and port that your masternode can be reached at.
 - The protocol version that your masternode supports.
 
@@ -25,13 +25,13 @@ The manager displays the following data about each masternode you have set up:
 ### Delegate Key
 
 A masternode requires a "delegate" key, which is known to both Dash Electrum and your masternode.
-Your masternode will use this key to sign messages, and the DASH network will know that you authorized
+Your masternode will use this key to sign messages, and the GXX network will know that you authorized
 it to.
 
 A delegate key can either be one of your Dash Electrum keys, or an imported key. Either way, your masternode
 and Dash Electrum will both need to know the private key. (See *Importing Masternode.conf* below.)
 
-To use one of your Dash Electrum keys as a delegate key, put its address in the `Masternode DASH Address`
+To use one of your Dash Electrum keys as a delegate key, put its address in the `Masternode GXX Address`
 field of the `View Masternode` tab.
 
 ### IP Address and Protocol Version
@@ -40,13 +40,13 @@ Certain information about your masternode is required. The IP address and port t
 must be supplied. Also, the protocol version that your masternode supports is required. This information is filled
 in automatically if you import a "masternode.conf" file.
 
-### Collateral (1000 DASH Payment)
+### Collateral (1000 GXX Payment)
 
-To start a masternode, you must have a 1000 DASH payment available in your wallet.
-You can scan your wallet for 1000 DASH payments in the `Activate Masternode` tab of the Masternode
+To start a masternode, you must have a 1000 GXX payment available in your wallet.
+You can scan your wallet for 1000 GXX payments in the `Activate Masternode` tab of the Masternode
 Manager.
 
-After scanning, a list of available 1000 DASH collateral payments will be displayed. Selecting one
+After scanning, a list of available 1000 GXX collateral payments will be displayed. Selecting one
 of them will cause the selected masternode's data to be filled in, though these changes won't be saved
 unless you activate the masternode.
 

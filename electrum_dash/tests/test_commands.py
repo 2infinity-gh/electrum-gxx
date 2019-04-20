@@ -1,7 +1,7 @@
 import unittest
 from decimal import Decimal
 
-from electrum_dash.commands import Commands, eval_bool
+from electrum_gxx.commands import Commands, eval_bool
 
 
 class TestCommands(unittest.TestCase):

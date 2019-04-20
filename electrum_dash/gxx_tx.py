@@ -92,7 +92,7 @@ class ProTxService (namedtuple('ProTxService', 'ip port')):
         return {'ip': self.ip, 'port': self.port}
 
 
-# https://dash-docs.github.io/en/developer-reference#outpoint
+# https://gxx-docs.github.io/en/developer-reference#outpoint
 class TxOutPoint(namedtuple('TxOutPoint', 'hash index')):
     '''Class representing tx output outpoint'''
     def __str__(self):
@@ -120,7 +120,7 @@ class TxOutPoint(namedtuple('TxOutPoint', 'hash index')):
         }
 
 
-# https://github.com/dashpay/dips/blob/master/dip-0002-special-transactions.md
+# https://github.com/gxxpay/dips/blob/master/dip-0002-special-transactions.md
 class ProTxBase:
     '''Base Class representing DIP2 Special Transactions'''
     def __init__(self, *args, **kwargs):

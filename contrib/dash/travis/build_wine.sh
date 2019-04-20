@@ -1,7 +1,7 @@
 #!/bin/bash
 
-source ./contrib/dash/travis/electrum_dash_version_env.sh;
-echo wine build version is $DASH_ELECTRUM_VERSION
+source ./contrib/gxx/travis/electrum_gxx_version_env.sh;
+echo wine build version is $GXX_ELECTRUM_VERSION
 
 mv /opt/zbarw $WINEPREFIX/drive_c/
 
@@ -11,14 +11,14 @@ mv /opt/libsecp256k1/libsecp256k1-0.dll \
    /opt/libsecp256k1/libsecp256k1.dll
 mv /opt/libsecp256k1 $WINEPREFIX/drive_c/
 
-cd $WINEPREFIX/drive_c/electrum-dash
+cd $WINEPREFIX/drive_c/electrum-gxx
 
 rm -rf build
-rm -rf dist/electrum-dash
+rm -rf dist/electrum-gxx
 
-cp contrib/dash/deterministic.spec .
-cp contrib/dash/pyi_runtimehook.py .
-cp contrib/dash/pyi_tctl_runtimehook.py .
+cp contrib/gxx/deterministic.spec .
+cp contrib/gxx/pyi_runtimehook.py .
+cp contrib/gxx/pyi_tctl_runtimehook.py .
 
 wine python -m pip install -r contrib/deterministic-build/requirements.txt
 wine python -m pip install -r contrib/deterministic-build/requirements-hw.txt
@@ -26,7 +26,7 @@ wine python -m pip install -r contrib/deterministic-build/requirements-binaries.
 wine python -m pip install PyInstaller==3.4 --no-use-pep517
 
 wine pyinstaller -y \
-    --name electrum-dash-$DASH_ELECTRUM_VERSION.exe \
+    --name electrum-gxx-$GXX_ELECTRUM_VERSION.exe \
     deterministic.spec
 
 if [[ $WINEARCH == win32 ]]; then
@@ -36,6 +36,6 @@ else
 fi
 
 wine "$NSIS_EXE" /NOCD -V3 \
-    /DPRODUCT_VERSION=$DASH_ELECTRUM_VERSION \
+    /DPRODUCT_VERSION=$GXX_ELECTRUM_VERSION \
     /DWINEARCH=$WINEARCH \
-    contrib/dash/electrum-dash.nsi
+    contrib/gxx/electrum-gxx.nsi

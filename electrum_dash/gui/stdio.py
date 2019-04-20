@@ -2,12 +2,12 @@ from decimal import Decimal
 import getpass
 import datetime
 
-from electrum_dash import WalletStorage, Wallet
-from electrum_dash.dash_tx import SPEC_TX_NAMES
-from electrum_dash.util import format_satoshis, set_verbosity
-from electrum_dash.bitcoin import is_address, COIN, TYPE_ADDRESS
-from electrum_dash.transaction import TxOutput
-from electrum_dash.network import TxBroadcastError, BestEffortRequestFailed
+from electrum_gxx import WalletStorage, Wallet
+from electrum_gxx.gxx_tx import SPEC_TX_NAMES
+from electrum_gxx.util import format_satoshis, set_verbosity
+from electrum_gxx.bitcoin import is_address, COIN, TYPE_ADDRESS
+from electrum_gxx.transaction import TxOutput
+from electrum_gxx.network import TxBroadcastError, BestEffortRequestFailed
 
 _ = lambda x:x  # i18n
 
@@ -22,7 +22,7 @@ class ElectrumGui:
         self.network = daemon.network
         storage = WalletStorage(config.get_wallet_path())
         if not storage.file_exists:
-            print("Wallet not found. try 'electrum-dash create'")
+            print("Wallet not found. try 'electrum-gxx create'")
             exit()
         if storage.is_encrypted():
             password = getpass.getpass('Password:', stream=None)
@@ -245,12 +245,12 @@ class ElectrumGui:
             #self.update_contacts_tab()
 
     def network_dialog(self):
-        print("use 'electrum-dash setconfig server/proxy' to change your network settings")
+        print("use 'electrum-gxx setconfig server/proxy' to change your network settings")
         return True
 
 
     def settings_dialog(self):
-        print("use 'electrum-dash setconfig' to change your settings")
+        print("use 'electrum-gxx setconfig' to change your settings")
         return True
 
     def password_dialog(self):

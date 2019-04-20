@@ -30,11 +30,11 @@ from PyQt5.QtCore import Qt, QPersistentModelIndex, QModelIndex
 from PyQt5.QtGui import QStandardItemModel, QStandardItem, QFont
 from PyQt5.QtWidgets import QAbstractItemView, QComboBox, QLabel, QMenu
 
-from electrum_dash.i18n import _
-from electrum_dash.util import block_explorer_URL
-from electrum_dash.plugin import run_hook
-from electrum_dash.bitcoin import is_address
-from electrum_dash.wallet import InternalAddressCorruption
+from electrum_gxx.i18n import _
+from electrum_gxx.util import block_explorer_URL
+from electrum_gxx.plugin import run_hook
+from electrum_gxx.bitcoin import is_address
+from electrum_gxx.wallet import InternalAddressCorruption
 
 from .util import MyTreeView, MONOSPACE_FONT, ColorScheme
 
@@ -175,7 +175,7 @@ class AddressList(MyTreeView):
             self.hideColumn(self.Columns.FIAT_BALANCE)
 
     def create_menu(self, position):
-        from electrum_dash.wallet import Multisig_Wallet
+        from electrum_gxx.wallet import Multisig_Wallet
         is_multisig = isinstance(self.wallet, Multisig_Wallet)
         can_delete = self.wallet.can_delete_address()
         selected = self.selected_in_column(self.Columns.ADDRESS)

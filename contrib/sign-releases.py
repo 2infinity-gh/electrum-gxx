@@ -14,7 +14,7 @@ NOTE on apk signing: To create a keystore and sign the apk you need to install
 To create a keystore run the following command:
 
     mkdir ~/.jks && keytool -genkey -v -keystore ~/.jks/keystore \
-        -alias electrum.dash.org -keyalg RSA -keysize 2048 \
+        -alias electrum.gxx.org -keyalg RSA -keysize 2048 \
         -validity 10000
 
 Then it shows a warning about the proprietary format and a command to migrate:
@@ -27,10 +27,10 @@ Manual signing:
     jarsigner -verbose \
         -tsa http://sha256timestamp.ws.symantec.com/sha256/timestamp \
         -sigalg SHA1withRSA -digestalg SHA1 \
-        -sigfile dash-electrum \
+        -sigfile gxx-electrum \
         -keystore ~/.jks/keystore \
-        Electrum_DASH-3.0.6.1-release-unsigned.apk \
-        electrum.dash.org
+        Electrum_GXX-3.0.6.1-release-unsigned.apk \
+        electrum.gxx.org
 
 Zipalign from Android SDK build tools is also required (set path to bin in
 settings file or with key -z). To install:
@@ -48,7 +48,7 @@ settings file or with key -z). To install:
 Manual zip aligning:
 
     android-sdk-linux/build-tools/27.0.3/zipalign -v 4 \
-        Electrum_DASH-3.0.6.1-release-unsigned.apk \
+        Electrum_GXX-3.0.6.1-release-unsigned.apk \
         Dash-Electrum-3.0.6.1-release.apk
 
 
@@ -146,7 +146,7 @@ PEP440_PUBVER_PATTERN = re.compile('^((\d+)!)?'
 REL_NOTES_PATTERN = re.compile('^#.+?(^[^#].+?)^#.+?', re.M | re.S)
 SDIST_NAME_PATTERN = re.compile('^Dash-Electrum-(.*).tar.gz$')
 SDIST_DIR_TEMPLATE = 'Dash-Electrum-{version}'
-PPA_SOURCE_NAME = 'electrum-dash'
+PPA_SOURCE_NAME = 'electrum-gxx'
 PPA_ORIG_NAME_TEMPLATE = '%s_{version}.orig.tar.gz' % PPA_SOURCE_NAME
 CHANGELOG_TEMPLATE = """%s ({ppa_version}) {series}; urgency=medium
 {changes} -- {uid}  {time}""" % PPA_SOURCE_NAME
@@ -157,7 +157,7 @@ LP_ARCHIVES_TEMPLATE = '%s/~{user}/+archive/ubuntu/{ppa}' % LP_API_URL
 
 # sing_apk related definitions
 JKS_KEYSTORE = os.path.join(HOME_DIR, '.jks/keystore')
-JKS_ALIAS = 'electrum.dash.org'
+JKS_ALIAS = 'electrum.gxx.org'
 JKS_STOREPASS = 'JKS_STOREPASS'
 JKS_KEYPASS = 'JKS_KEYPASS'
 KEYTOOL_ARGS = ['keytool', '-list', '-storepass:env', JKS_STOREPASS]
@@ -165,11 +165,11 @@ JARSIGNER_ARGS = [
     'jarsigner', '-verbose',
     '-tsa', 'http://sha256timestamp.ws.symantec.com/sha256/timestamp',
     '-sigalg', 'SHA1withRSA', '-digestalg', 'SHA1',
-    '-sigfile', 'dash-electrum',
+    '-sigfile', 'gxx-electrum',
     '-storepass:env', JKS_STOREPASS,
     '-keypass:env', JKS_KEYPASS,
 ]
-UNSIGNED_APK_PATTERN = re.compile('^Electrum_DASH-(.*)-release-unsigned.apk$')
+UNSIGNED_APK_PATTERN = re.compile('^Electrum_GXX-(.*)-release-unsigned.apk$')
 SIGNED_APK_TEMPLATE = 'Dash-Electrum-{version}-release.apk'
 
 

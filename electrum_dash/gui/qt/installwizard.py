@@ -14,11 +14,11 @@ from PyQt5.QtWidgets import (QWidget, QDialog, QLabel, QHBoxLayout, QMessageBox,
                              QVBoxLayout, QLineEdit, QFileDialog, QPushButton,
                              QGridLayout, QSlider, QScrollArea)
 
-from electrum_dash.wallet import Wallet
-from electrum_dash.storage import WalletStorage
-from electrum_dash.util import UserCancelled, InvalidPassword
-from electrum_dash.base_wizard import BaseWizard, HWD_SETUP_DECRYPT_WALLET, GoBack
-from electrum_dash.i18n import _
+from electrum_gxx.wallet import Wallet
+from electrum_gxx.storage import WalletStorage
+from electrum_gxx.util import UserCancelled, InvalidPassword
+from electrum_gxx.base_wizard import BaseWizard, HWD_SETUP_DECRYPT_WALLET, GoBack
+from electrum_gxx.i18n import _
 
 from .seed_dialog import SeedLayout, KeysLayout
 from .network_dialog import NetworkChoiceLayout
@@ -155,7 +155,7 @@ class InstallWizard(QDialog, MessageBoxMixin, BaseWizard):
         hbox.setStretchFactor(scroll, 1)
         outer_vbox.addLayout(hbox)
         outer_vbox.addLayout(Buttons(self.back_button, self.next_button))
-        self.set_icon('electrum-dash.png')
+        self.set_icon('electrum-gxx.png')
         self.show()
         self.raise_()
         self.refresh_gui()  # Need for QT on MacOSX.  Lame.

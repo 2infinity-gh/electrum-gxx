@@ -1,10 +1,10 @@
 import time
 from struct import pack
 
-from electrum_dash.i18n import _
-from electrum_dash.util import PrintError, UserCancelled
-from electrum_dash.keystore import bip39_normalize_passphrase
-from electrum_dash.bip32 import (serialize_xpub,
+from electrum_gxx.i18n import _
+from electrum_gxx.util import PrintError, UserCancelled
+from electrum_gxx.keystore import bip39_normalize_passphrase
+from electrum_gxx.bip32 import (serialize_xpub,
                                  convert_bip32_path_to_list_of_uint32)
 
 
@@ -53,8 +53,8 @@ class HideezClientBase(GuiMixin, PrintError):
 
     def has_usable_connection_with_device(self):
         try:
-            res = self.ping("electrum-dash pinging device")
-            assert res == "electrum-dash pinging device"
+            res = self.ping("electrum-gxx pinging device")
+            assert res == "electrum-gxx pinging device"
         except BaseException:
             return False
         return True

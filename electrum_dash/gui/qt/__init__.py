@@ -41,10 +41,10 @@ from PyQt5.QtWidgets import (QApplication, QSystemTrayIcon, QWidget, QMenu,
 from PyQt5.QtCore import QObject, pyqtSignal, QTimer
 import PyQt5.QtCore as QtCore
 
-from electrum_dash.i18n import _, set_language
-from electrum_dash.plugin import run_hook
-from electrum_dash.base_wizard import GoBack
-from electrum_dash.util import (UserCancelled, PrintError, profiler,
+from electrum_gxx.i18n import _, set_language
+from electrum_gxx.plugin import run_hook
+from electrum_gxx.base_wizard import GoBack
+from electrum_gxx.util import (UserCancelled, PrintError, profiler,
                                 WalletFileException, BitcoinException, get_new_wallet_name)
 
 from .installwizard import InstallWizard
@@ -89,7 +89,7 @@ class ElectrumGui(PrintError):
         if hasattr(QtCore.Qt, "AA_ShareOpenGLContexts"):
             QtCore.QCoreApplication.setAttribute(QtCore.Qt.AA_ShareOpenGLContexts)
         if hasattr(QGuiApplication, 'setDesktopFileName'):
-            QGuiApplication.setDesktopFileName('electrum-dash.desktop')
+            QGuiApplication.setDesktopFileName('electrum-gxx.desktop')
         self.gui_thread = threading.current_thread()
         self.config = config
         self.daemon = daemon
@@ -98,7 +98,7 @@ class ElectrumGui(PrintError):
         self.efilter = OpenFileEventFilter(self.windows)
         self.app = QElectrumApplication(sys.argv)
         self.app.installEventFilter(self.efilter)
-        self.app.setWindowIcon(read_QIcon("electrum-dash.png"))
+        self.app.setWindowIcon(read_QIcon("electrum-gxx.png"))
         # timer
         self.timer = QTimer(self.app)
         self.timer.setSingleShot(False)
@@ -123,11 +123,11 @@ class ElectrumGui(PrintError):
         use_dark_theme = self.config.get('qt_gui_color_theme', 'default') == 'dark'
         self.app.setStyle('Fusion')
         if use_dark_theme:
-            from .dark_dash_style import dash_stylesheet
-            self.app.setStyleSheet(dash_stylesheet)
+            from .dark_gxx_style import gxx_stylesheet
+            self.app.setStyleSheet(gxx_stylesheet)
         else:
-            from .dash_style import dash_stylesheet
-            self.app.setStyleSheet(dash_stylesheet)
+            from .gxx_style import gxx_stylesheet
+            self.app.setStyleSheet(gxx_stylesheet)
         # Even if we ourselves don't set the dark theme,
         # the OS/window manager/etc might set *a dark theme*.
         # Hence, try to choose colors accordingly:

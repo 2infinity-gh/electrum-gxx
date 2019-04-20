@@ -1,4 +1,4 @@
-from electrum_dash.util import PrintError
+from electrum_gxx.util import PrintError
 
 
 class SafeTTransport(PrintError):

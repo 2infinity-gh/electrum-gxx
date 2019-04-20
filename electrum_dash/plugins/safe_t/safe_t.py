@@ -2,15 +2,15 @@ from binascii import hexlify, unhexlify
 import traceback
 import sys
 
-from electrum_dash.util import bfh, bh2u, versiontuple, UserCancelled, UserFacingException
-from electrum_dash.bitcoin import TYPE_ADDRESS, TYPE_SCRIPT
-from electrum_dash.bip32 import deserialize_xpub
-from electrum_dash import constants
-from electrum_dash.i18n import _
-from electrum_dash.plugin import Device
-from electrum_dash.transaction import deserialize, Transaction
-from electrum_dash.keystore import Hardware_KeyStore, is_xpubkey, parse_xpubkey
-from electrum_dash.base_wizard import ScriptTypeNotSupported
+from electrum_gxx.util import bfh, bh2u, versiontuple, UserCancelled, UserFacingException
+from electrum_gxx.bitcoin import TYPE_ADDRESS, TYPE_SCRIPT
+from electrum_gxx.bip32 import deserialize_xpub
+from electrum_gxx import constants
+from electrum_gxx.i18n import _
+from electrum_gxx.plugin import Device
+from electrum_gxx.transaction import deserialize, Transaction
+from electrum_gxx.keystore import Hardware_KeyStore, is_xpubkey, parse_xpubkey
+from electrum_gxx.base_wizard import ScriptTypeNotSupported
 
 from ..hw_wallet import HW_PluginBase
 from ..hw_wallet.plugin import is_any_tx_output_on_change_branch, trezor_validate_op_return_output_and_get_data

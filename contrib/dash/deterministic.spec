@@ -22,40 +22,40 @@ hiddenimports += collect_submodules('websocket')
 hiddenimports.remove('safetlib.qt.pinmatrix')
 
 hiddenimports += [
-    'electrum_dash',
-    'electrum_dash.base_crash_reporter',
-    'electrum_dash.base_wizard',
-    'electrum_dash.plot',
-    'electrum_dash.qrscanner',
-    'electrum_dash.websockets',
-    'electrum_dash.gui.qt',
+    'electrum_gxx',
+    'electrum_gxx.base_crash_reporter',
+    'electrum_gxx.base_wizard',
+    'electrum_gxx.plot',
+    'electrum_gxx.qrscanner',
+    'electrum_gxx.websockets',
+    'electrum_gxx.gui.qt',
     'PyQt5.sip',
 
-    'electrum_dash.plugins',
+    'electrum_gxx.plugins',
 
-    'electrum_dash.plugins.hw_wallet.qt',
+    'electrum_gxx.plugins.hw_wallet.qt',
 
-    'electrum_dash.plugins.audio_modem.qt',
-    'electrum_dash.plugins.cosigner_pool.qt',
-    'electrum_dash.plugins.digitalbitbox.qt',
-    'electrum_dash.plugins.email_requests.qt',
-    'electrum_dash.plugins.keepkey.qt',
-    'electrum_dash.plugins.revealer.qt',
-    'electrum_dash.plugins.labels.qt',
-    'electrum_dash.plugins.trezor.qt',
-    'electrum_dash.plugins.hideez.client',
-    'electrum_dash.plugins.hideez.qt',
-    'electrum_dash.plugins.safe_t.client',
-    'electrum_dash.plugins.safe_t.qt',
-    'electrum_dash.plugins.ledger.qt',
-    'electrum_dash.plugins.virtualkeyboard.qt',
+    'electrum_gxx.plugins.audio_modem.qt',
+    'electrum_gxx.plugins.cosigner_pool.qt',
+    'electrum_gxx.plugins.digitalbitbox.qt',
+    'electrum_gxx.plugins.email_requests.qt',
+    'electrum_gxx.plugins.keepkey.qt',
+    'electrum_gxx.plugins.revealer.qt',
+    'electrum_gxx.plugins.labels.qt',
+    'electrum_gxx.plugins.trezor.qt',
+    'electrum_gxx.plugins.hideez.client',
+    'electrum_gxx.plugins.hideez.qt',
+    'electrum_gxx.plugins.safe_t.client',
+    'electrum_gxx.plugins.safe_t.qt',
+    'electrum_gxx.plugins.ledger.qt',
+    'electrum_gxx.plugins.virtualkeyboard.qt',
 ]
 
 datas = [
-    ('electrum_dash/*.json', 'electrum_dash'),
-    ('electrum_dash/locale', 'electrum_dash/locale'),
-    ('electrum_dash/wordlist', 'electrum_dash/wordlist'),
-    ('electrum_dash/gui/icons', 'electrum_dash/gui/icons'),
+    ('electrum_gxx/*.json', 'electrum_gxx'),
+    ('electrum_gxx/locale', 'electrum_gxx/locale'),
+    ('electrum_gxx/wordlist', 'electrum_gxx/wordlist'),
+    ('electrum_gxx/gui/icons', 'electrum_gxx/gui/icons'),
     ('C:\\zbarw', '.'),
 ]
 
@@ -113,7 +113,7 @@ excludes += [
     'PyQt5.QtWinExtras',
 ]
 
-a = Analysis(['electrum-dash'],
+a = Analysis(['electrum-gxx'],
              hiddenimports=hiddenimports,
              datas=datas,
              binaries=binaries,
@@ -135,7 +135,7 @@ exe = EXE(pyz,
           strip=False,
           upx=False,
           console=False,
-          icon='electrum_dash/gui/icons/electrum-dash.ico',
+          icon='electrum_gxx/gui/icons/electrum-gxx.ico',
           name=os.path.join('build\\pyi.win32\\electrum', cmdline_name))
 
 # exe with console output
@@ -146,7 +146,7 @@ conexe = EXE(pyz,
           strip=False,
           upx=False,
           console=True,
-          icon='electrum_dash/gui/icons/electrum-dash.ico',
+          icon='electrum_gxx/gui/icons/electrum-gxx.ico',
           name=os.path.join('build\\pyi.win32\\electrum',
                             'console-%s' % cmdline_name))
 
@@ -175,4 +175,4 @@ coll = COLLECT(exe, conexe, #tctl_exe,
                a.datas,
                strip=False,
                upx=False,
-               name=os.path.join('dist', 'electrum-dash'))
+               name=os.path.join('dist', 'electrum-gxx'))

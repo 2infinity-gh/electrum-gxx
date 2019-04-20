@@ -116,7 +116,7 @@ class SimpleConfig(PrintError):
             path = os.path.join(path, 'regtest')
             make_dir(path, allow_symlink=False)
 
-        self.print_error("electrum-dash directory", path)
+        self.print_error("electrum-gxx directory", path)
         return path
 
     def rename_config_keys(self, config, keypairs, deprecation_warning=False):
@@ -199,7 +199,7 @@ class SimpleConfig(PrintError):
         base_unit = self.user_config.get('base_unit')
         if isinstance(base_unit, str):
             self._set_key_in_user_config('base_unit', None)
-            map_ = {'dash':8, 'mdash':5, 'udash':2, 'duffs':0, 'sat':0}
+            map_ = {'gxx':8, 'mgxx':5, 'ugxx':2, 'duffs':0, 'sat':0}
             decimal_point = map_.get(base_unit.lower())
             self._set_key_in_user_config('decimal_point', decimal_point)
 
@@ -547,7 +547,7 @@ class SimpleConfig(PrintError):
 
 
 def read_user_config(path):
-    """Parse and store the user config settings in electrum-dash.conf into user_config[]."""
+    """Parse and store the user config settings in electrum-gxx.conf into user_config[]."""
     if not path:
         return {}
     config_path = os.path.join(path, "config")

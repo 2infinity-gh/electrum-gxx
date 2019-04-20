@@ -1,13 +1,13 @@
 """Dash look and feel."""
 
 import os
-from electrum_dash.util import pkg_dir
+from electrum_gxx.util import pkg_dir
 
 
-dash_stylesheet = """
+gxx_stylesheet = """
 
 /**********************/
-/* DASH Evolution CSS */
+/* GXX Evolution CSS */
 /*
 0. OSX Reset
 1. Navigation Bar
@@ -409,7 +409,7 @@ QComboBox::drop-down {
 }
 
 QComboBox::down-arrow {
-    border-image: url({pkg_dir}/gui/icons/dash_downArrow.png) 0 0 0 0 stretch stretch;
+    border-image: url({pkg_dir}/gui/icons/gxx_downArrow.png) 0 0 0 0 stretch stretch;
 }
 
 QComboBox QListView {
@@ -458,23 +458,23 @@ QAbstractSpinBox::down-button {
 }
 
 QAbstractSpinBox::up-arrow {
-    image: url({pkg_dir}/gui/icons/dash_upArrow_small.png);
+    image: url({pkg_dir}/gui/icons/gxx_upArrow_small.png);
     width: 10px;
     height: 10px;
 }
 
 QAbstractSpinBox::up-arrow:disabled, QAbstractSpinBox::up-arrow:off {
-    image: url({pkg_dir}/gui/icons/dash_upArrow_small_disabled.png);
+    image: url({pkg_dir}/gui/icons/gxx_upArrow_small_disabled.png);
 }
 
 QAbstractSpinBox::down-arrow {
-    image: url({pkg_dir}/gui/icons/dash_downArrow_small.png);
+    image: url({pkg_dir}/gui/icons/gxx_downArrow_small.png);
     width: 10px;
     height: 10px;
 }
 
 QAbstractSpinBox::down-arrow:disabled, QAbstractSpinBox::down-arrow:off {
-    image: url({pkg_dir}/gui/icons/dash_downArrow_small_disabled.png);
+    image: url({pkg_dir}/gui/icons/gxx_downArrow_small_disabled.png);
 }
 
 QSlider::groove:horizontal {
@@ -618,19 +618,19 @@ QScrollBar:up-arrow, QScrollBar:down-arrow, QScrollBar:left-arrow, QScrollBar:ri
 }
 
 QScrollBar:up-arrow {
-    background-image: url({pkg_dir}/gui/icons/dash_upArrow_small.png);
+    background-image: url({pkg_dir}/gui/icons/gxx_upArrow_small.png);
 }
 
 QScrollBar:down-arrow {
-    background-image: url({pkg_dir}/gui/icons/dash_downArrow_small.png);
+    background-image: url({pkg_dir}/gui/icons/gxx_downArrow_small.png);
 }
 
 QScrollBar:left-arrow {
-    background-image: url({pkg_dir}/gui/icons/dash_leftArrow_small.png);
+    background-image: url({pkg_dir}/gui/icons/gxx_leftArrow_small.png);
 }
 
 QScrollBar:right-arrow {
-    background-image: url({pkg_dir}/gui/icons/dash_rightArrow_small.png);
+    background-image: url({pkg_dir}/gui/icons/gxx_rightArrow_small.png);
 }
 
 
@@ -788,4 +788,4 @@ QWizard #info-label {
 
 
 pkg_dir_for_css = pkg_dir.replace(os.sep, '/')
-dash_stylesheet = dash_stylesheet.replace('{pkg_dir}', '%s' % pkg_dir_for_css)
+gxx_stylesheet = gxx_stylesheet.replace('{pkg_dir}', '%s' % pkg_dir_for_css)

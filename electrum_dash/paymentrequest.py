@@ -37,7 +37,7 @@ try:
     from . import paymentrequest_pb2 as pb2
 except ImportError:
     sys.exit("Error: could not find paymentrequest_pb2.py. Create it with "
-             "'protoc --proto_path=electrum_dash/ --python_out=electrum_dash/ electrum_dash/paymentrequest.proto'")
+             "'protoc --proto_path=electrum_gxx/ --python_out=electrum_gxx/ electrum_gxx/paymentrequest.proto'")
 
 from . import bitcoin, ecc, util, transaction, x509, rsakey
 from .util import print_error, bh2u, bfh, export_meta, import_meta, make_aiohttp_session
@@ -47,8 +47,8 @@ from .transaction import TxOutput
 from .network import Network
 
 
-REQUEST_HEADERS = {'Accept': 'application/dash-paymentrequest', 'User-Agent': 'Dash-Electrum'}
-ACK_HEADERS = {'Content-Type':'application/dash-payment','Accept':'application/dash-paymentack','User-Agent':'Dash-Electrum'}
+REQUEST_HEADERS = {'Accept': 'application/gxx-paymentrequest', 'User-Agent': 'Dash-Electrum'}
+ACK_HEADERS = {'Content-Type':'application/gxx-payment','Accept':'application/gxx-paymentack','User-Agent':'Dash-Electrum'}
 
 ca_path = certifi.where()
 ca_list = None
@@ -79,9 +79,9 @@ async def get_payment_request(url: str) -> 'PaymentRequest':
                 async with session.get(url) as response:
                     resp_content = await response.read()
                     response.raise_for_status()
-                    # Guard against `dash:`-URIs with invalid payment request URLs
+                    # Guard against `gxx:`-URIs with invalid payment request URLs
                     if "Content-Type" not in response.headers \
-                    or response.headers["Content-Type"] != "application/dash-paymentrequest":
+                    or response.headers["Content-Type"] != "application/gxx-paymentrequest":
                         data = None
                         error = "payment URL not pointing to a payment request handling server"
                     else:

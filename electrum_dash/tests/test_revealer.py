@@ -1,4 +1,4 @@
-from electrum_dash.plugins.revealer.revealer import RevealerPlugin
+from electrum_gxx.plugins.revealer.revealer import RevealerPlugin
 
 from . import SequentialTestCase
 

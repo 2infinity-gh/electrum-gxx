@@ -10,8 +10,8 @@ from PyQt5 import QtCore
 from PyQt5 import QtGui
 from PyQt5 import QtWidgets
 
-from electrum_dash import util
-from electrum_dash.i18n import _
+from electrum_gxx import util
+from electrum_gxx.i18n import _
 
 from .util import MONOSPACE_FONT
 

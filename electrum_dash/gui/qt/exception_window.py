@@ -30,8 +30,8 @@ import PyQt5.QtCore as QtCore
 from PyQt5.QtWidgets import (QWidget, QLabel, QPushButton, QTextEdit,
                              QMessageBox, QHBoxLayout, QVBoxLayout)
 
-from electrum_dash.i18n import _
-from electrum_dash.base_crash_reporter import BaseCrashReporter
+from electrum_gxx.i18n import _
+from electrum_gxx.base_crash_reporter import BaseCrashReporter
 from .util import MessageBoxMixin, read_QIcon
 
 

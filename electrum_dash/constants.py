@@ -47,10 +47,10 @@ class AbstractNet:
 class BitcoinMainnet(AbstractNet):
 
     TESTNET = False
-    WIF_PREFIX = 204
-    ADDRTYPE_P2PKH = 76
-    ADDRTYPE_P2SH = 16
-    GENESIS = "00000ffd590b1485b3caadc19b22e6379c733355108f107a430458cdf3407ab6"
+    WIF_PREFIX = 0xd2
+    ADDRTYPE_P2PKH = 0x28
+    ADDRTYPE_P2SH = 0x0a
+    GENESIS = "322bad477efb4b33fa4b1f0b2861eaf543c61068da9898a95062fdb02ada486f"
     DEFAULT_PORTS = {'t': '50001', 's': '50002'}
     DEFAULT_SERVERS = read_json('servers.json', {})
     CHECKPOINTS = read_json('checkpoints.json', [])
@@ -61,9 +61,8 @@ class BitcoinMainnet(AbstractNet):
     XPUB_HEADERS = {
         'standard':    0x0488b21e,  # xpub
     }
-    DRKV_HEADER = 0x02fe52f8  # drkv
-    DRKP_HEADER = 0x02fe52cc  # drkp
-    BIP44_COIN_TYPE = 5
+
+    BIP44_COIN_TYPE = 285
     DIP3_ACTIVATION_HEIGHT = 1028160
 
 

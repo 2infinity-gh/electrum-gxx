@@ -12,15 +12,15 @@ from PyQt5.QtWidgets import (QLineEdit, QComboBox, QListWidget, QDoubleSpinBox,
                              QGroupBox, QCheckBox, QPushButton, QGridLayout,
                              QFileDialog, QWizard)
 
-from electrum_dash import dash_tx
-from electrum_dash.bitcoin import (COIN, deserialize_privkey,
+from electrum_gxx import gxx_tx
+from electrum_gxx.bitcoin import (COIN, deserialize_privkey,
                                    b58_address_to_hash160,
                                    hash160_to_p2pkh, is_b58_address)
-from electrum_dash.crypto import hash_160
-from electrum_dash.dash_tx import TxOutPoint
-from electrum_dash import ecc
-from electrum_dash.protx import ProTxMN, ProTxService, ProRegTxExc
-from electrum_dash.util import bfh, bh2u
+from electrum_gxx.crypto import hash_160
+from electrum_gxx.gxx_tx import TxOutPoint
+from electrum_gxx import ecc
+from electrum_gxx.protx import ProTxMN, ProTxService, ProRegTxExc
+from electrum_gxx.util import bfh, bh2u
 
 from .util import MONOSPACE_FONT, icon_path, read_QIcon
 
@@ -44,7 +44,7 @@ class SComboBox(QComboBox):
 
 
 class OutputsList(QListWidget):
-    '''Widget that displays available 1000 DASH outputs.'''
+    '''Widget that displays available 1000 GXX outputs.'''
     outputSelected = pyqtSignal(dict, name='outputSelected')
     def __init__(self, parent=None):
         super(OutputsList, self).__init__(parent)
@@ -309,8 +309,8 @@ class ImportLegacyWizardPage(QWizardPage):
                 value = 0
 
         if prevout_hash:
-            val_dash = '%s DASH' % (value/COIN) if value else ''
-            self.collateral_val.setText(val_dash)
+            val_gxx = '%s GXX' % (value/COIN) if value else ''
+            self.collateral_val.setText(val_gxx)
             self.collateral_value = value
             self.collateral.setText('%s:%s' % (prevout_hash, prevout_n))
             self.collateral_addr.setText(address)
@@ -597,12 +597,12 @@ class BlsKeysWizardPage(QWizardPage):
 
         self.setTitle('BLS keys setup')
         if start_id in parent.UPD_ENTER_PAGES:
-            self.setSubTitle('Regenerate BLS keypair, setup dashd')
+            self.setSubTitle('Regenerate BLS keypair, setup gxxd')
             if not self.bls_priv.text():
                 self.bls_priv.setText(new_mn.bls_privk)
                 self.bls_pub.setText(new_mn.pubkey_operator)
         else:
-            self.setSubTitle('Generate BLS keypair, setup dashd')
+            self.setSubTitle('Generate BLS keypair, setup gxxd')
 
         if not self.bls_priv.text():
             self.generate_bls_keypair()
@@ -620,7 +620,7 @@ class BlsKeysWizardPage(QWizardPage):
         bls_pubk_hex = bh2u(bls_pubk.serialize())
         self.bls_info_label.setText('BLS keypair generated. Before '
                                     'registering new Masternode copy next '
-                                    'line to ~/.dashcore/dashd.conf and '
+                                    'line to ~/.gxxcore/gxxd.conf and '
                                     'restart masternode:')
         self.bls_info_label.show()
         self.bls_info_edit.setText('masternodeblsprivkey=%s' % bls_privk_hex)
@@ -892,15 +892,15 @@ class SaveDip3WizardPage(QWizardPage):
                 if start_id == parent.OPERATION_TYPE_PAGE:
                     pro_tx = manager.prepare_pro_reg_tx(alias)
                     tx_descr = 'ProRegTx'
-                    tx_type = dash_tx.SPEC_PRO_REG_TX
+                    tx_type = gxx_tx.SPEC_PRO_REG_TX
                 elif start_id == parent.UPD_SRV_PAGE:
                     pro_tx = manager.prepare_pro_up_srv_tx(self.new_mn)
                     tx_descr = 'ProUpServTx'
-                    tx_type = dash_tx.SPEC_PRO_UP_SERV_TX
+                    tx_type = gxx_tx.SPEC_PRO_UP_SERV_TX
                 elif start_id == parent.UPD_REG_PAGE:
                     pro_tx = manager.prepare_pro_up_reg_tx(self.new_mn)
                     tx_descr = 'ProUpRegTx'
-                    tx_type = dash_tx.SPEC_PRO_UP_REG_TX
+                    tx_type = gxx_tx.SPEC_PRO_UP_REG_TX
             except ProRegTxExc as e:
                 gui.show_error(e)
                 return True
@@ -960,7 +960,7 @@ class CollateralWizardPage(QWizardPage):
         self.frozen_cb = QCheckBox('Include frozen addresses')
         self.frozen_cb.setChecked(False)
         self.frozen_cb.stateChanged.connect(self.frozen_state_changed)
-        self.not_found = QLabel('No 1000 DASH outputs were found.')
+        self.not_found = QLabel('No 1000 GXX outputs were found.')
         self.not_found.setObjectName('err-label')
         self.not_found.hide()
 
@@ -1459,7 +1459,7 @@ class Dip3MasternodeWizard(QWizard):
         self.setWizardStyle(QWizard.ClassicStyle)
         self.setPixmap(QWizard.LogoPixmap, logo)
         self.setWindowTitle(title)
-        self.setWindowIcon(read_QIcon('electrum-dash.png'))
+        self.setWindowIcon(read_QIcon('electrum-gxx.png'))
         self.setMinimumSize(1000, 450)
 
     def validate_alias(self, alias):

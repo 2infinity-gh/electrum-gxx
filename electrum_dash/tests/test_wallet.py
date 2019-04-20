@@ -8,11 +8,11 @@ from unittest import TestCase
 import time
 
 from io import StringIO
-from electrum_dash.storage import WalletStorage, FINAL_SEED_VERSION
-from electrum_dash.wallet import Abstract_Wallet
-from electrum_dash.exchange_rate import ExchangeBase, FxThread
-from electrum_dash.util import TxMinedInfo
-from electrum_dash.bitcoin import COIN
+from electrum_gxx.storage import WalletStorage, FINAL_SEED_VERSION
+from electrum_gxx.wallet import Abstract_Wallet
+from electrum_gxx.exchange_rate import ExchangeBase, FxThread
+from electrum_gxx.util import TxMinedInfo
+from electrum_gxx.bitcoin import COIN
 
 from . import SequentialTestCase
 
